@@ -1,0 +1,33 @@
+{# Reusable fragments shared across the index, tag, and tags pages.
+   `base` is the relative path from the current page back to the site root
+   (e.g. "" for index.html, "../../" for a post or tag page). #}
+
+{% macro mathjax() -%}
+  <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']] } };</script>
+  <script id="MathJax-script" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+{%- endmacro %}
+
+{% macro taglist(tags, base) -%}
+{%- if tags -%}
+<ul class="tag-list">
+{%- for t in tags %}<li><a class="tag" href="{{ base }}tags/{{ t.slug }}/">{{ t.name }}</a></li>{% endfor -%}
+</ul>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro post_card(post, base) -%}
+    <article class="post-card">
+      <h2 class="post-title"><a href="{{ base }}{{ post.url }}">{{ post.title_html|safe }}</a></h2>
+      <div class="post-meta">
+        {%- if post.date %}<time datetime="{{ post.date }}">{{ post.date }}</time>{% endif -%}
+        {%- if post.date and post.author %} &middot; {% endif -%}
+        {%- if post.author %}{{ post.author }}{% endif -%}
+      </div>
+      {%- if post.abstract_html %}
+      <p class="post-abstract">{{ post.abstract_html|safe }}</p>
+      {%- endif %}
+      <p class="post-pdf"><a class="post-pdf-link" href="{{ base }}{{ post.pdf_url }}">Download as a PDF</a></p>
+      {{ taglist(post.tags, base) }}
+    </article>
+{%- endmacro %}

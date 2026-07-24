@@ -1,0 +1,17 @@
+{% extends "base.html.j2" %}
+{% from "_macros.html.j2" import post_card, mathjax %}
+
+{% block title %}Tagged &ldquo;{{ tag.name }}&rdquo; &middot; {{ site_title }}{% endblock %}
+{% block head_extra %}{% if needs_math %}{{ mathjax() }}{% endif %}{% endblock %}
+{% block body_class %}blog-index tag-page{% endblock %}
+
+{% block content %}
+  <header class="blog-header">
+    <p class="blog-nav"><a class="blog-home" href="{{ base }}tags/">&larr; all tags</a></p>
+    <h1>Tagged &ldquo;{{ tag.name }}&rdquo;</h1>
+    <p class="blog-tagline">{{ posts|length }} post{{ '' if posts|length == 1 else 's' }}</p>
+  </header>
+  <main>
+{% for post in posts %}{{ post_card(post, base) }}
+{% endfor %}  </main>
+{% endblock %}

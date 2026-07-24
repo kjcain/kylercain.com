@@ -1,0 +1,230 @@
+/* Blog chrome, layered on top of LaTeXML's LaTeXML.css + ltx-article.css.
+   Loaded last, so these rules win where they overlap. */
+
+/* Solarized (Ethan Schoonover). Light uses the base3/base00 pairing,
+   dark uses base03/base0, both with the blue accent. */
+:root {
+  --bg:        #fdf6e3;  /* base3  */
+  --fg:        #657b83;  /* base00 — body text */
+  --fg-strong: #586e75;  /* base01 — headings   */
+  --muted:     #93a1a1;  /* base1  */
+  --accent:    #268bd2;  /* blue   */
+  --border:    #eee8d5;  /* base2  */
+  --card:      #eee8d5;  /* base2  */
+  --code-bg:   #eee8d5;  /* base2  */
+  --measure:   42rem;    /* comfortable reading width */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #002b36;  /* base03 */
+    --fg:        #839496;  /* base0  — body text */
+    --fg-strong: #93a1a1;  /* base1  — headings   */
+    --muted:     #586e75;  /* base01 */
+    --accent:    #268bd2;  /* blue   */
+    --border:    #073642;  /* base02 */
+    --card:      #073642;  /* base02 */
+    --code-bg:   #073642;  /* base02 */
+  }
+}
+
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  line-height: 1.65;
+  margin: 0;
+  padding: 0 1.25rem;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* ---- shared nav / footer ---- */
+.blog-nav,
+.blog-header,
+main,
+.blog-footer {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+.blog-nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0 0.5rem;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+.blog-nav .blog-home { color: var(--muted); text-decoration: none; }
+.blog-nav .blog-home:hover { color: var(--accent); }
+.blog-nav .post-pdf-link {
+  margin-left: auto;
+  text-align: right;
+}
+
+.blog-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.85rem;
+}
+
+/* ---- index page ---- */
+.blog-header {
+  padding: 2.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.blog-header h1 {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 2.1rem;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+  color: var(--fg-strong);
+}
+.blog-tagline { color: var(--muted); margin: 0; }
+
+.post-card {
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.post-title {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.35rem;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+.post-title a { color: var(--fg-strong); text-decoration: none; }
+.post-title a:hover { color: var(--accent); }
+.post-meta {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.post-abstract { margin: 0; color: var(--fg); }
+.empty { color: var(--muted); }
+
+/* ---- tags ---- */
+.blog-taglink,
+.post-pdf-link {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+.blog-taglink,
+.post-pdf {
+  margin: 0.75rem 0 0;
+}
+.tag-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+.tag-list li { margin: 0; }
+.tag {
+  display: inline-block;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  padding: 0.1em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  text-decoration: none;
+}
+.tag:hover { color: var(--accent); border-color: var(--accent); }
+
+/* injected at the foot of each rendered post */
+.post-tags {
+  max-width: var(--measure);
+  margin: 2.5rem auto 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.post-tags .tag-list { margin: 0; }
+.post-tags-label {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+/* /tags/ overview */
+.tag-cloud {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0;
+}
+.tag-cloud li { margin: 0; }
+.tag-cloud .tag { font-size: 0.95rem; padding: 0.3em 0.85em; }
+.tag-count {
+  color: var(--muted);
+  font-size: 0.8em;
+  margin-left: 0.15em;
+}
+
+/* ---- rendered posts: reduce LaTeXML's full-width layout to a column ---- */
+.ltx_page_main,
+.ltx_page_content {
+  max-width: var(--measure);
+  margin-inline: auto;
+  background: transparent;
+}
+.ltx_document { padding: 0; }
+.ltx_title_document,
+.ltx_title_section,
+.ltx_title_subsection {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--fg-strong);
+}
+.ltx_page_navbar,
+.ltx_page_header,
+.ltx_page_footer { display: none; }  /* we supply our own nav/footer */
+
+/* code & listings */
+.ltx_verbatim,
+pre, code, tt {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+/* block code: \begin{verbatim} / lstlisting -> <pre> */
+pre.ltx_verbatim,
+.ltx_listing {
+  background: var(--code-bg);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+}
+
+/* inline code: \verb|...| -> <code>. Tight pill, no block padding. */
+code.ltx_verbatim {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 0.08em 0.35em;
+}
+
+/* keep wide math/tables from breaking the page on mobile */
+.ltx_equation,
+.ltx_tabular,
+math { max-width: 100%; overflow-x: auto; }
+
+img, svg { max-width: 100%; height: auto; }

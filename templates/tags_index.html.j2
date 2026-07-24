@@ -1,0 +1,17 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Tags &middot; {{ site_title }}{% endblock %}
+{% block body_class %}blog-index tags-index{% endblock %}
+
+{% block content %}
+  <header class="blog-header">
+    <p class="blog-nav"><a class="blog-home" href="{{ base }}index.html">&larr; {{ site_title }}</a></p>
+    <h1>Tags</h1>
+    <p class="blog-tagline">{{ tags|length }} tag{{ '' if tags|length == 1 else 's' }}</p>
+  </header>
+  <main>
+    <ul class="tag-cloud">
+{% for tag in tags %}      <li><a class="tag" href="{{ base }}tags/{{ tag.slug }}/">{{ tag.name }} <span class="tag-count">{{ tag.count }}</span></a></li>
+{% endfor %}    </ul>
+  </main>
+{% endblock %}

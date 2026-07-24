@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{base}
+\usepackage{url}
+
+\title{LaTeX-based Static Website}
+\author{Kyler Cain}
+\date{2026-07-24}
+% tags: latex, webdev
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This site uses a small static publishing system in which every post is written
+as a standalone \LaTeX\ document and compiled to both a PDF and HTML version.
+\end{abstract}
+
+\section{Objectives}
+
+I wanted to be able to write articles in a familiar format and publish them both
+to the web and as a PDF (for printing, sharing, or offline reading) without
+maintaining having to think about both formats separately. I also wanted to keep
+the site implementation small and simple without a database or application server.
+
+This site is intended to be a personal blog and notes site, not a general-purpose
+static-site generator, so I didn't have to think about too many use cases.
+
+\section{Challenges}
+
+My main difficulty is that \LaTeX\ was never intended to produce html output, so
+I took a page from arxiv.org\cite{arxiv_accessible_html} and used
+LaTeXML\cite{latexml} to handle the conversion.
+
+After getting the basic conversion working, I also wanted to add a tagging system,
+a site index, and some basic navigation. This was fairly easy using
+Jinja\cite{jinja} templates and a small Python 3\cite{python3} script to read the
+\LaTeX\ sources and generate the additional HTML pages.
+
+\section{Implementation}
+
+Each post is a standalone document whose file name is also the URL slug to the post
+directory (where I also place the generated PDF). The source files contain a
+title, author, date, and abstract that I extract for metadata. The tags are
+declared using a comment like \verb|% tags: webdev|.
+
+The builder normalizes each tag into a URL-safe slug and generates a page for each
+post and tag. It also generates an index page listing all posts in reverse chronological
+order.
+
+The toolchain is packaged in Docker\cite{docker}, and
+Makefile\cite{gnu_make} targets handle the build and deployment.
+The hosting is done using GitHub Pages, which serves the generated static files directly
+from CI/CD build artifacts.
+
+\section{Results}
+
+I have a working static site that is easy to maintain and should be fairly easy to
+extend in the future. Adding posts doesn't really require any knowledge of the
+publishing system and building/deploying is entirely automated. Hosting via GitHub
+Pages is free and simple and the site is fast and reliable thanks to the simplicity
+of the static files.
+
+\section{Future Work}
+
+The biggest shortcoming of the current system is that it requires static artifacts for
+each post, which means I can't make it build dependencies of posts (such as figures or
+output from other scripts).
+
+There is also no paging so you would load the entire index or all of the posts for a tag.
+At the scale I am planning to use this site, this isn't a problem (especially since I'm
+not incurring any kind of hosting cost), but it may make the site less usable as the
+number of posts grows.
+
+\begin{thebibliography}{99}
+
+\bibitem{arxiv_accessible_html}
+arXiv.org, ``Accessible HTML,''
+\url{https://arxiv.org/help/web_accessibility}
+
+\bibitem{latexml}
+Bruce R. Miller, ``LaTeXML: A LaTeX to XML/HTML/MathML Converter,''
+\url{https://math.nist.gov/~BMiller/LaTeXML/}
+
+\bibitem{jinja}
+Pallets, ``Jinja Documentation,''
+\url{https://jinja.palletsprojects.com/en/stable/}
+
+\bibitem{python3}
+Python Software Foundation, ``Python 3 Documentation,''
+\url{https://docs.python.org/3/}
+
+\bibitem{docker}
+Docker, Inc., ``Docker,''
+\url{https://docker.com/}
+
+\bibitem{gnu_make}
+Free Software Foundation, ``GNU Make Manual,''
+\url{https://www.gnu.org/software/make/manual/make.html}
+
+\end{thebibliography}
+
+\end{document}
