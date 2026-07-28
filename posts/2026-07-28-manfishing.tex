@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{base}
+\usepackage{url}
+
+\title{Manfishing.net}
+\author{Kyler Cain}
+\date{2026-07-28}
+% tags: unix, games, learning
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Manfishing is a daily guessing game played on the Unix manual. Each round shows
+the \verb|SEE ALSO| cross-references of a hidden man page and and you have to guess
+which one. Ten rounds a day, the same ten for everyone, and includes the full text
+of the manuals so you can read them after you play. Play it at at \url{https://manfishing.net/}.
+\end{abstract}
+
+\section{How it plays}
+
+A round gives you a list of cross-references and nothing else, for example:
+
+\begin{quote}
+\verb|pldd(1)   sprof(1)   ld.so(8)   ldconfig(8)|
+\end{quote}
+
+Those four pages are what one particular manual page lists under \verb|SEE ALSO|.
+Then you get to guess the name of the page that includes those options. 
+Here the answer is \verb|ldd|\cite{ldd}, which you may be able to guess as the clues
+are all about the dynamic linker.
+
+There are 10 rounds each day, everyone shares them so you can compare your guesses
+with others. When you finish a round, the reveal shows the page's one-line description
+and a link to the full page, so you can read it and learn what you missed.
+
+At the end of the game, you get a summary of how many you got right and wrong and an 
+easily shareable emoji recap of your performance, similar to the one Wordle\cite{wordle}
+and Catfishing.net\cite{catfishing} offer. 
+
+\section{Why \texttt{SEE ALSO}}
+
+\verb|SEE ALSO| is a conventional section in the man pages\cite{man_pages_7}, 
+and is known to be human-generated and should be based on the author's expectation
+of what other information would be most valuable to a reader. Even better is that,
+thanks to the man-pages project\cite{man_pages_project}, there are thousands.
+
+\section{What it is for}
+
+My goal in making this game was to get people to read the manual, and to do it in a
+way that is more fun than just reading and hopefully would involve a social component.
+My coworkers and I have been playing the catfishing game\cite{catfishing} for a while,
+and I wanted to make something similar for the Unix manual.
+
+The game is deliberately structured to encourage further reading:
+
+\begin{itemize}
+  \item \textbf{Every round ends on a page.} Win or lose, the reveal links
+  provides you a link to the man page for the potential answers.
+
+  \item \textbf{Wrong-but-reasonable is not punished.} Many groups of clues fit
+  several pages equally well. Nothing in the clues for \verb|latex(1)|
+  distinguishes it from \verb|lualatex(1)| or \verb|xelatex(1)|, so all of them
+  count, and the reveal names the whole family.
+
+  \item \textbf{Randomized rounds.} The ten pages for each day are drawn at random from
+  the pool of eligible pages, ensuring a fresh challenge every day, and there are so
+  many pages that you're basically guaranteed to learn something new every day.
+\end{itemize}
+
+\section{The scoreboard and difficulty ratings}
+
+The game keeps track of how well the community does on each page so you can compare
+yourself against the global average. The pages also include a difficulty rating that you
+can contribute to that I plan to use to make the game more interesting in the future, 
+for example by ensuring a certain mix of easy and hard pages each day.
+
+\section{Try it}
+
+It is live at \url{https://manfishing.net/}\cite{manfishing}, and there is a new
+edition every day.
+
+\begin{thebibliography}{99}
+
+\bibitem{manfishing}
+Kyler Cain, ``manfishing,''
+\url{https://manfishing.net/}
+
+\bibitem{catfishing}
+Catfishing, ``catfishing,''
+\url{https://catfishing.net/}
+
+\bibitem{wordle}
+Josh Wardle, ``Wordle,''
+\url{https://www.nytimes.com/games/wordle/}
+
+\bibitem{man_pages_7}
+``man-pages(7), conventions for writing Linux man pages,''
+\url{https://man7.org/linux/man-pages/man7/man-pages.7.html}
+
+\bibitem{man_pages_project}
+Michael Kerrisk, ``The Linux man-pages project,''
+\url{https://www.kernel.org/doc/man-pages/}
+
+\bibitem{ldd}
+``ldd(1), print shared object dependencies,''
+\url{https://man7.org/linux/man-pages/man1/ldd.1.html}
+
+\end{thebibliography}
+
+\end{document}
