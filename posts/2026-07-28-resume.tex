@@ -6,83 +6,91 @@
 \date{2026-07-28}
 % tags: resume
 
+\newcommand{\summarytext}{%
+Software and security engineer working across the stack, from low-level systems
+code in C, Python, and Rust to backend services and internal tooling. Experienced
+in reverse engineering, vulnerability research, and the design of secure,
+performance-critical systems, with a record of shipping reliable software on
+short timelines and adapting it as requirements change. Comfortable leading small
+teams, collaborating across disciplines, and turning ambiguous or incomplete
+requirements into maintainable technical solutions.}
+
 \begin{document}
 
-% The abstract exists only to give the site index a blurb; a printed resume
-% should not carry one, so it is skipped in the PDF build.
 \ifresumepdf\else
 \begin{abstract}
-TODO: One or two sentences describing the kind of work you do and what you are
-looking for. This is what shows up as the blurb on the site index.
+\summarytext
 \end{abstract}
 \fi
 
 %----------HEADING----------
 \begin{center}
     \textbf{\Huge Kyler Cain} \\ \vspace{5pt}
-    % \textbar rather than the original template's $|$: inline math would make
-    % LaTeXML emit a <math> element for each separator, which the site
-    % stylesheet turns into a scroll container.
-    \small \texttt{kylercain1996@gmail.com} \hspace{1pt} \textbar
-    \hspace{1pt} \href{https://kylercain.com}{\myuline{\texttt{kylercain.com}}} \hspace{1pt} \textbar
-    \hspace{1pt} \href{https://github.com/kjcain}{\myuline{\texttt{github.com/kjcain}}} \hspace{1pt} \textbar
-    \hspace{1pt} \texttt{TODO: Location}
+    \small \texttt{Grovetown, GA} \hspace{1pt} \textbar
+    \hspace{1pt} \texttt{kylercain1996@gmail.com} \hspace{1pt} \textbar
+    \hspace{1pt} \texttt{US Citizen} \hspace{1pt} \textbar
+    \hspace{1pt} \texttt{TS/SCI w/ CI Poly.} \\ \vspace{2pt}
+    \small \href{https://kylercain.com}{\myuline{\texttt{kylercain.com}}} \hspace{1pt} \textbar
+    \hspace{1pt} \href{https://github.com/kjcain}{\myuline{\texttt{github.com/kjcain}}}
     \\ \vspace{-3pt}
 \end{center}
+
+%-----------SUMMARY-----------
+% Only in the PDF; the HTML build already shows this as the abstract.
+\ifresumepdf
+\section{SUMMARY}
+\summarytext
+\fi
 
 %-----------EXPERIENCE-----------
 \section{EXPERIENCE}
   \resumeSubHeadingListStart
 
     \resumeSubheading
-      {TODO: Company}{Mon. Year -- Present}
-      {TODO: Job Title}{TODO: City, ST}
+      {ICR Inc.}{Dec 2021 -- Present}
+      {Senior Cyber Reverse Engineer, (Full-time)}{Grovetown, GA}
       \resumeItemListStart
-        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
-        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
-        \resumeItem{TODO: Systems or technologies you owned}
+        \resumeItem{Conduct vulnerability research, software engineering, exploit development,
+          and operational support for intelligence and military cyber customers}
+        \resumeItem{Initiated two new projects and expanded the scope of three others,
+          more than doubling supported targets in response to mission requirements}
+        \resumeItem{Delivered short-turn tool modifications and operational releases on timelines
+          as short as one week while maintaining parallel long-term development schedules}
+        \resumeItem{Collaborated with multidisciplinary teams to translate operational needs into
+          reliable, deployable technical solutions}
       \resumeItemListEnd
 
     \resumeSubheading
-      {TODO: Company}{Mon. Year -- Mon. Year}
-      {TODO: Job Title}{TODO: City, ST}
+      {US Army}{Dec 2021 -- Oct 2025}
+      {Cyberspace Operations Officer (Reserves, Part-time)}{Fort Gordon, GA}
       \resumeItemListStart
-        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
-        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
+        \resumeItem{Provided continuity and technical oversight for long-term cyber capability
+          development efforts}
+        \resumeItem{Supported short-turn operational projects and mentored personnel completing
+          Basic and Senior Unix Persistence Job Qualification Records}
       \resumeItemListEnd
-
-  \resumeSubHeadingListEnd
-
-%-----------PROJECTS-----------
-\section{PROJECTS}
-  \resumeSubHeadingListStart
-
-    \resumeProjectHeading
-      {\textbf{TODO: Project Name}}{Mon. Year -- Mon. Year}
-      \resumeItemListStart
-        \resumeItem{TODO: What it does and what you built}
-        \resumeItem{TODO: Outcome, adoption, or link, e.g.
-          \href{https://github.com/kjcain}{\myuline{GitHub}}}
-      \resumeItemListEnd
-
-    \resumeProjectHeading
-      {\textbf{TODO: Project Name}}{Mon. Year -- Mon. Year}
-      \resumeItemListStart
-        \resumeItem{TODO: What it does and what you built}
-      \resumeItemListEnd
-
-  \resumeSubHeadingListEnd
-
-%-----------EDUCATION-----------
-\section{EDUCATION}
-  \resumeSubHeadingListStart
 
     \resumeSubheading
-      {TODO: Institution}{Mon. Year -- Mon. Year}
-      {TODO: Degree}{TODO: City, ST}
+      {US Army}{Sep 2018 -- Dec 2021}
+      {Cyberspace Operations Officer (Full-time)}{Fort Gordon, GA}
       \resumeItemListStart
-        \resumeItem{\textbf{Coursework}: TODO}
-        \resumeItem{\textbf{Honors}: TODO}
+        \resumeItem{Led small teams developing offensive cyberspace capabilities across
+          RF, Linux, and Windows domains}
+        \resumeItem{Deployed with an Expeditionary Cyber Team to Qatar in support of the
+          Information Warfare Task Force and Special Operations Joint Task Force operations
+          in Afghanistan in 2021}
+        \resumeItem{Completed Basic Combat Training, Officer Candidate School, Cyber Basic Officer
+          Leader Course, and Senior UNIX Persistence Cyberspace Capabilities Developer certification}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Dominion Energy}{Oct 2015 -- Mar 2018}
+      {Applications Developer (Part-time)}{Cayce, SC}
+      \resumeItemListStart
+        \resumeItem{Developed internal backend systems for document management and enterprise
+          data aggregation}
+        \resumeItem{Supported operational users through iterative improvement and system
+          maintenance}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd
@@ -91,9 +99,68 @@ looking for. This is what shows up as the blurb on the site index.
 \section{SKILLS}
   \begin{itemize}[leftmargin=0in, label={}]
     \small{\item{
-      \textbf{Languages}      {: TODO}\vspace{2pt} \\
-      \textbf{Infrastructure} {: TODO}\vspace{2pt} \\
-      \textbf{Tools}          {: TODO}
+      \textbf{Computing Languages and Technologies} {: C, Python, Rust, Shell Script,
+        Linux/UNIX, GCC, GDB}\vspace{2pt} \\
+      \textbf{Reverse Engineering} {: Ghidra, static and dynamic analysis, binary
+        instrumentation, vulnerability research}\vspace{2pt} \\
+      \textbf{Networking} {: TCP/IP, Cisco, protocol analysis, threat modeling}\vspace{2pt} \\
+      \textbf{Operational and Analytical} {: Rapid prototyping and fabrication under time and
+        resource constraints, technical writing, working in information degraded environments}
+    }}
+  \end{itemize}
+
+%-----------EDUCATION-----------
+\section{EDUCATION}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Georgia Institute of Technology}{Expected Aug 2026}
+      {Master of Science in Computer Science}{Atlanta, GA}
+      \resumeItemListStart
+        \resumeItem{Graduate training in systems-level computing with an emphasis on operating
+          systems, computer architecture, distributed systems, and performance-critical software.
+          Focus on analysis and implementation of low-level, scalable, and secure systems}
+        \resumeItem{\textbf{Specialization}: Computing Systems}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {University of South Carolina}{May 2018}
+      {Bachelor of Science in Computer Information Systems}{Columbia, SC}
+      \resumeItemListStart
+        \resumeItem{Interdisciplinary degree focused on applied computing in business applications
+          with coursework in software development, databases, networking, cybersecurity, and
+          systems analysis. Emphasis on translating operational requirements into technical
+          solutions, integrating information systems across organizations, and supporting secure,
+          scalable enterprise environments}
+        \resumeItem{\textbf{Minor}: Business Information Management}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------HONORS-----------
+\section{HONORS}
+  \begin{itemize}[leftmargin=0in, label={}]
+    \small{\item{
+      Joint Service Achievement Medal, US Army\vspace{2pt} \\
+      Global War on Terrorism Expeditionary Medal, US Army\vspace{2pt} \\
+      NATO Non-Article 5 Afghanistan, US Army
+    }}
+  \end{itemize}
+
+%-----------PROFESSIONAL SOCIETIES-----------
+\section{PROFESSIONAL SOCIETIES}
+  \resumeSubHeadingListStart
+    % Keep this label short: \resumeProjectHeading lays the name and date out in a
+    % tabular* with \extracolsep{\fill}, so a long name leaves no gap between them.
+    \resumeProjectHeading
+      {IEEE -- General and Computer Society Membership}{Aug 2019 -- Present}
+  \resumeSubHeadingListEnd
+
+%-----------ADDITIONAL INTERESTS-----------
+\section{ADDITIONAL INTERESTS}
+  \begin{itemize}[leftmargin=0in, label={}]
+    \small{\item{
+      Cooking, Baking, Reading, Conlangs, Esoteric Programming Languages, and Electronics.
     }}
   \end{itemize}
 

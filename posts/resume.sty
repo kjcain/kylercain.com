@@ -27,6 +27,17 @@
 \newif\ifresumepdf
 \ifdefined\pdfsavepos \resumepdftrue \fi
 
+% The entry macros lay their two columns out with tabular*{\textwidth}, which
+% pins the right column to the margin. LaTeXML drops that width, so each row
+% becomes an auto-sized table and the dates no longer line up with each other.
+% Tag the rows so the stylesheet can restore the full width; \lxAddClass is a
+% LaTeXML extension, so pdflatex gets a no-op.
+\ifresumepdf
+  \providecommand{\lxAddClass}[1]{}
+\else
+  \RequirePackage{latexml}
+\fi
+
 % Underline that breaks around descenders. contour draws the text repeatedly to
 % fake the knockout, which is right for the PDF but turns into dozens of
 % duplicated copies of the link text in the HTML build, so the HTML gets a plain
@@ -84,6 +95,7 @@
 % {organization}{dates}{role}{location}
 \newcommand{\resumeSubheading}[4]{
   \vspace{-1pt}\item
+    \lxAddClass{resume-row}%
     \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & {\small #2}\vspace{1pt}\\
       \textit{#3} & {\small #4}\\
@@ -92,6 +104,7 @@
 
 \newcommand{\resumeSubSubheading}[2]{
     \item
+    \lxAddClass{resume-row}%
     \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
       \textit{\small#1} & \textit{\small #2} \\
     \end{tabular*}\vspace{-7pt}
@@ -100,6 +113,7 @@
 % {name}{dates}
 \newcommand{\resumeProjectHeading}[2]{
     \item
+    \lxAddClass{resume-row}%
     \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
       #1 & {\small #2} \\
     \end{tabular*}\vspace{-4pt}

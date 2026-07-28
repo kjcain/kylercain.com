@@ -229,4 +229,10 @@ code.ltx_verbatim {
 .ltx_tabular,
 math[display="block"] { max-width: 100%; overflow-x: auto; }
 
+/* Resume entry rows. The TeX lays these out as tabular*{\textwidth}, which pins
+   the dates and locations to the right margin; LaTeXML drops that width, so each
+   heading table sizes to its own content and the right column fails to line up
+   from one entry to the next. Restore the full width. */
+.resume-row .ltx_tabular { width: 100%; }
+
 img, svg { max-width: 100%; height: auto; }
