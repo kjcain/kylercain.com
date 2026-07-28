@@ -95,7 +95,9 @@ def extract_metadata(xml_path: Path, slug: str) -> Post:
     date_element = root.find(f'{_q("date")}[@role="creation"]')
     if date_element is None:
         date_element = root.find(_q("date"))
-    date = (date_element.text or "").strip() if date_element is not None else ""
+    # Not date_element.text: a themed post can wrap the date in a styling
+    # element (e.g. a document-wide \color), leaving the text one level down.
+    date = _plain_text(date_element) if date_element is not None else ""
 
     author_element = root.find(f'{_q("creator")}/{_q("personname")}')
     author = _plain_text(author_element) if author_element is not None else ""

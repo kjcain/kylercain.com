@@ -1,0 +1,118 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{resume}[2026/07/28 Resume theme for kylercain.com]
+
+% Adapted from Harshibar's resume template (MIT), which is itself based on
+% https://github.com/jakeryang/resume. The icon fonts (fontawesome5, FiraMono)
+% of the original are dropped: they live in texmf-dist-fontsextra, which would
+% add ~1.8 GiB to the build image for a handful of glyphs, and LaTeXML has no
+% way to render them into the HTML build anyway.
+
+\RequirePackage{latexsym}
+\RequirePackage[empty]{fullpage}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{fancyhdr}
+\RequirePackage[english]{babel}
+\RequirePackage{tabularx}
+
+% Helvetica-style sans body font.
+\RequirePackage{tgheros}
+\renewcommand*\familydefault{\sfdefault}
+\RequirePackage[T1]{fontenc}
+
+% \pdfsavepos is a pdftex primitive that LaTeXML does not stub, so it tells the
+% two builds apart. (\pdfgentounicode and \pdfoutput are both stubbed, and
+% neither \LaTeXMLversion nor the iflatexml package is available here.)
+\newif\ifresumepdf
+\ifdefined\pdfsavepos \resumepdftrue \fi
+
+% Underline that breaks around descenders. contour draws the text repeatedly to
+% fake the knockout, which is right for the PDF but turns into dozens of
+% duplicated copies of the link text in the HTML build, so the HTML gets a plain
+% underline instead.
+\RequirePackage[normalem]{ulem}
+\renewcommand{\ULdepth}{1.8pt}
+\ifresumepdf
+  \RequirePackage{contour}
+  \contourlength{0.8pt}
+  \newcommand{\myuline}[1]{%
+    \uline{\phantom{#1}}%
+    \llap{\contour{white}{#1}}%
+  }
+\else
+  \newcommand{\myuline}[1]{\uline{#1}}
+\fi
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{0in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+    \bfseries \vspace{2pt} \raggedright \large
+}{}{0em}{}[{\titlerule[2pt]} \vspace{-4pt}]
+
+% Make the generated PDF machine readable so applicant tracking systems can
+% parse it.
+\ifresumepdf
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+%-------------------------
+% Resume entry commands
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-1pt}}
+  }
+}
+
+% {organization}{dates}{role}{location}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & {\small #2}\vspace{1pt}\\
+      \textit{#3} & {\small #4}\\
+    \end{tabular*}\vspace{-4pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+% {name}{dates}
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+      #1 & {\small #2} \\
+    \end{tabular*}\vspace{-4pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+% Smaller bullet for nested lists. The original template used
+% $\vcenter{\hbox{\tiny$\bullet$}}$, but that math segfaults latexmlpost's
+% MathML processor (LaTeXML 0.8.8); \textbullet renders in both builds.
+\renewcommand\labelitemii{{\tiny\textbullet}}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0pt}}

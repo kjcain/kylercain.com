@@ -30,7 +30,9 @@ RUN apk add --no-cache \
     python3 \
     texlive \
     texmf-dist-fontsrecommended \
+    texmf-dist-latexextra \
     texmf-dist-latexrecommended \
+    texmf-dist-plaingeneric \
     zlib-dev \
     && cpanm --notest --force LaTeXML
 

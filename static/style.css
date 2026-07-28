@@ -222,9 +222,11 @@ code.ltx_verbatim {
   padding: 0.08em 0.35em;
 }
 
-/* keep wide math/tables from breaking the page on mobile */
+/* keep wide math/tables from breaking the page on mobile. Display math only:
+   inline <math> sits a pixel or so outside its own box, so an unqualified
+   `math` rule makes every inline formula draw its own scrollbar. */
 .ltx_equation,
 .ltx_tabular,
-math { max-width: 100%; overflow-x: auto; }
+math[display="block"] { max-width: 100%; overflow-x: auto; }
 
 img, svg { max-width: 100%; height: auto; }

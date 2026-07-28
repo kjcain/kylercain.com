@@ -82,6 +82,10 @@ def render_post(tex_path: Path, site_title: str) -> Post:
     run_command(
         [
             "latexml",
+            # Without this, LaTeXML only harvests \RequirePackage lines from our
+            # own .sty theme files and discards the rest, so any macro they
+            # define is undefined in the HTML build.
+            "--includestyles",
             f"--dest={xml_path}",
             f"--log={LOGS_DIR / f'{slug}.latexml.log'}",
             str(tex_path),

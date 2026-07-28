@@ -1,0 +1,100 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage{resume}
+
+\title{Resume}
+\author{Kyler Cain}
+\date{2026-07-28}
+% tags: resume
+
+\begin{document}
+
+% The abstract exists only to give the site index a blurb; a printed resume
+% should not carry one, so it is skipped in the PDF build.
+\ifresumepdf\else
+\begin{abstract}
+TODO: One or two sentences describing the kind of work you do and what you are
+looking for. This is what shows up as the blurb on the site index.
+\end{abstract}
+\fi
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge Kyler Cain} \\ \vspace{5pt}
+    % \textbar rather than the original template's $|$: inline math would make
+    % LaTeXML emit a <math> element for each separator, which the site
+    % stylesheet turns into a scroll container.
+    \small \texttt{kylercain1996@gmail.com} \hspace{1pt} \textbar
+    \hspace{1pt} \href{https://kylercain.com}{\myuline{\texttt{kylercain.com}}} \hspace{1pt} \textbar
+    \hspace{1pt} \href{https://github.com/kjcain}{\myuline{\texttt{github.com/kjcain}}} \hspace{1pt} \textbar
+    \hspace{1pt} \texttt{TODO: Location}
+    \\ \vspace{-3pt}
+\end{center}
+
+%-----------EXPERIENCE-----------
+\section{EXPERIENCE}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {TODO: Company}{Mon. Year -- Present}
+      {TODO: Job Title}{TODO: City, ST}
+      \resumeItemListStart
+        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
+        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
+        \resumeItem{TODO: Systems or technologies you owned}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {TODO: Company}{Mon. Year -- Mon. Year}
+      {TODO: Job Title}{TODO: City, ST}
+      \resumeItemListStart
+        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
+        \resumeItem{TODO: Accomplishment with scope and \textbf{measurable impact}}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{PROJECTS}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{TODO: Project Name}}{Mon. Year -- Mon. Year}
+      \resumeItemListStart
+        \resumeItem{TODO: What it does and what you built}
+        \resumeItem{TODO: Outcome, adoption, or link, e.g.
+          \href{https://github.com/kjcain}{\myuline{GitHub}}}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{TODO: Project Name}}{Mon. Year -- Mon. Year}
+      \resumeItemListStart
+        \resumeItem{TODO: What it does and what you built}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------EDUCATION-----------
+\section{EDUCATION}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {TODO: Institution}{Mon. Year -- Mon. Year}
+      {TODO: Degree}{TODO: City, ST}
+      \resumeItemListStart
+        \resumeItem{\textbf{Coursework}: TODO}
+        \resumeItem{\textbf{Honors}: TODO}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{SKILLS}
+  \begin{itemize}[leftmargin=0in, label={}]
+    \small{\item{
+      \textbf{Languages}      {: TODO}\vspace{2pt} \\
+      \textbf{Infrastructure} {: TODO}\vspace{2pt} \\
+      \textbf{Tools}          {: TODO}
+    }}
+  \end{itemize}
+
+\end{document}
