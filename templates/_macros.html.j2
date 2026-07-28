@@ -16,6 +16,31 @@
 {%- endif -%}
 {%- endmacro %}
 
+{# Floating sidebar for the index. Content comes from the "sidebar" object in
+   site.json, so links and blurb are edited there, not here. A link URL is used
+   as-is when it is absolute (http…, mailto:, #, /) and prefixed with `base`
+   otherwise, so internal links like "posts/<slug>/" keep working. #}
+{% macro sidebar(data, base) -%}
+{%- if data -%}
+<aside class="index-sidebar">
+{%- if data.heading %}
+  <h2 class="sidebar-heading">{{ data.heading }}</h2>
+{%- endif %}
+{%- if data.blurb %}
+  <p class="sidebar-blurb">{{ data.blurb }}</p>
+{%- endif %}
+{%- if data.links %}
+  <ul class="sidebar-links">
+{%- for link in data.links %}
+{%- set absolute = link.url.startswith(('http://', 'https://', 'mailto:', '#', '/')) %}
+    <li><a href="{{ link.url if absolute else base ~ link.url }}">{{ link.label }}</a></li>
+{%- endfor %}
+  </ul>
+{%- endif %}
+</aside>
+{%- endif -%}
+{%- endmacro %}
+
 {% macro post_card(post, base) -%}
     <article class="post-card">
       <h2 class="post-title"><a href="{{ base }}{{ post.url }}">{{ post.title_html|safe }}</a></h2>

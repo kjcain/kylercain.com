@@ -143,6 +143,7 @@ def render_page(template: str, output_path: Path, *, base: str, **context: Any) 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     context.setdefault("description", "")
     context.setdefault("needs_math", False)
+    context.setdefault("sidebar_data", None)
     document = jinja.get_template(template).render(base=base, **context)
     output_path.write_text(document, encoding="utf-8")
 
@@ -192,6 +193,7 @@ def build_index(posts: list[Post], config: dict[str, Any], has_tags: bool) -> No
         base="",
         site_title=config.get("title", "Blog"),
         description=config.get("description", ""),
+        sidebar_data=config.get("sidebar"),
         posts=posts,
         needs_math=any(post.has_math for post in posts),
         has_tags=has_tags,

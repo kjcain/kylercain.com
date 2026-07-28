@@ -79,6 +79,86 @@ main,
   font-size: 0.85rem;
 }
 
+/* ---- index sidebar ----
+   Narrow screens: the sidebar is just a card stacked above the post list.
+   Wide screens: a two-column grid, with the sidebar sticking to the viewport as
+   the posts scroll past. The grid pair is centred, so the reading column sits
+   slightly left of the page centre; .blog-footer is padded to match so its text
+   still lines up with the posts. */
+.index-sidebar {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  max-width: var(--measure);
+  margin: 1.5rem auto 0;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+.sidebar-heading {
+  font-size: 1rem;
+  margin: 0 0 0.4rem;
+  color: var(--fg-strong);
+  letter-spacing: -0.01em;
+}
+.sidebar-blurb {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin: 0;
+  color: var(--muted);
+}
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.9rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: 0.9rem;
+}
+.sidebar-links li { margin: 0; }
+
+@media (min-width: 68rem) {
+  .index-layout {
+    display: grid;
+    grid-template-columns: minmax(0, var(--measure)) 14rem;
+    grid-template-rows: auto 1fr;
+    justify-content: center;
+    column-gap: 3rem;
+  }
+  /* Explicit placement, because the sidebar sits between the header and the
+     posts in source order but belongs beside both here. */
+  .index-layout > .blog-header { grid-column: 1; grid-row: 1; }
+  .index-layout > main         { grid-column: 1; grid-row: 2; }
+  .index-layout > .blog-header,
+  .index-layout > main {
+    max-width: none;
+    margin-inline: 0;
+  }
+  .index-sidebar {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+    position: sticky;
+    top: 2.5rem;
+    max-width: none;
+    margin: 3.6rem 0 0;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+  }
+  .sidebar-links {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  /* Span the whole grid, then pad the sidebar column away so the footer text
+     lines up with the posts while the rule above it still runs full width.
+     border-box keeps that padding inside the max-width rather than adding to it. */
+  .index-page .blog-footer {
+    box-sizing: border-box;
+    max-width: calc(var(--measure) + 14rem + 3rem);
+    padding-right: calc(14rem + 3rem);
+  }
+}
+
 /* ---- index page ---- */
 .blog-header {
   padding: 2.5rem 0 1.5rem;

@@ -1,5 +1,15 @@
 {
   "title": "kylercain.com",
-  "description": "My personal notes and projects.",
-  "author": "Kyler Cain"
+  "description": "My personal notes and side projects.",
+  "author": "Kyler Cain",
+  "sidebar": {
+    "heading": "Links",
+    "blurb": "",
+    "links": [
+      { "label": "Resume", "url": "posts/2026-07-28-resume/" },
+      { "label": "GitHub", "url": "https://github.com/kjcain" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/kyler-cain/" },
+      { "label": "Manfishing (game)", "url": "https://manfishing.net/" }
+    ]
+  }
 }
