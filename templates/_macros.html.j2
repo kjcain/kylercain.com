@@ -53,8 +53,8 @@
       <p class="post-abstract">{{ post.abstract_html|safe }}</p>
       {%- endif %}
       <p class="post-downloads">
-        <a class="post-download" href="{{ base }}{{ post.pdf_url }}">a PDF</a>
-        <a class="post-download" href="{{ base }}{{ post.epub_url }}">an ePub</a>
+        <a class="post-download" href="{{ base }}{{ post.pdf_url }}">PDF</a>
+        <a class="post-download" href="{{ base }}{{ post.epub_url }}">ePub</a>
       </p>
       {{ taglist(post.tags, base) }}
     </article>
