@@ -3,7 +3,7 @@
    latexmlpost produces. #}
 
 {% macro nav(home_url, site_title, pdf_url, epub_url) -%}
-<nav class="blog-nav"><a class="blog-home" href="{{ home_url }}">&larr; {{ site_title }}</a><span class="post-downloads"><a class="post-download" href="{{ pdf_url }}">a PDF</a><a class="post-download" href="{{ epub_url }}">an ePub</a></span></nav>
+<nav class="blog-nav"><a class="blog-home" href="{{ home_url }}">&larr; {{ site_title }}</a><span class="post-downloads"><a class="post-download" href="{{ pdf_url }}">PDF</a><a class="post-download" href="{{ epub_url }}">ePub</a></span></nav>
 {%- endmacro %}
 
 {% macro footer(home_url) -%}
