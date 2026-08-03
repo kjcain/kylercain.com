@@ -31,3 +31,7 @@ class Post:
     @property
     def pdf_url(self) -> str:
         return f"posts/{self.slug}/post.pdf"
+
+    @property
+    def epub_url(self) -> str:
+        return f"posts/{self.slug}/post.epub"

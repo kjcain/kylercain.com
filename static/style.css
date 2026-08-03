@@ -65,8 +65,9 @@ main,
 }
 .blog-nav .blog-home { color: var(--muted); text-decoration: none; }
 .blog-nav .blog-home:hover { color: var(--accent); }
-.blog-nav .post-pdf-link {
-  margin-left: auto;
+.blog-nav .post-downloads {
+  margin: 0 0 0 auto;
+  justify-content: flex-end;
   text-align: right;
 }
 
@@ -196,13 +197,20 @@ main,
 
 /* ---- tags ---- */
 .blog-taglink,
-.post-pdf-link {
+.post-download {
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 0.9rem;
 }
 .blog-taglink,
-.post-pdf {
+.post-downloads {
   margin: 0.75rem 0 0;
+}
+/* The download links wrap as a group so the post nav keeps them on one line
+   when it fits and stacks them, still right-aligned, when it does not. */
+.post-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
 }
 .tag-list {
   list-style: none;

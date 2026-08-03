@@ -52,7 +52,10 @@
       {%- if post.abstract_html %}
       <p class="post-abstract">{{ post.abstract_html|safe }}</p>
       {%- endif %}
-      <p class="post-pdf"><a class="post-pdf-link" href="{{ base }}{{ post.pdf_url }}">Download as a PDF</a></p>
+      <p class="post-downloads">
+        <a class="post-download" href="{{ base }}{{ post.pdf_url }}">a PDF</a>
+        <a class="post-download" href="{{ base }}{{ post.epub_url }}">an ePub</a>
+      </p>
       {{ taglist(post.tags, base) }}
     </article>
 {%- endmacro %}

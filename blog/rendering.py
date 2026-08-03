@@ -18,6 +18,8 @@ logger = logging.getLogger(__name__)
 HOME_URL = "../../index.html"
 POST_BASE = "../../"
 STYLE_URL = "../../style.css"
+PDF_NAME = "post.pdf"
+EPUB_NAME = "post.epub"
 PDFLATEX_PASSES = 2
 
 jinja = Environment(
@@ -45,15 +47,17 @@ def run_command(cmd: list[str], log_path: Path, *, cwd: Path | None = None) -> N
 
 
 def render_post(tex_path: Path, site_title: str) -> Post:
-    """Render a TeX source into a published HTML page and PDF."""
+    """Render a TeX source into a published HTML page, PDF, and ePub."""
     slug = tex_path.stem
     tags = parse_tags(tex_path)
     xml_path = BUILD_DIR / f"{slug}.xml"
     pdf_build_dir = BUILD_DIR / "pdf" / slug
+    epub_build_dir = BUILD_DIR / "epub" / slug
     output_dir = SITE_POSTS_DIR / slug
     output_dir.mkdir(parents=True, exist_ok=True)
     html_path = output_dir / "index.html"
-    pdf_path = output_dir / "post.pdf"
+    pdf_path = output_dir / PDF_NAME
+    epub_path = output_dir / EPUB_NAME
 
     pdf_build_dir.mkdir(parents=True, exist_ok=True)
     pdflatex_command = [
@@ -76,7 +80,7 @@ def render_post(tex_path: Path, site_title: str) -> Post:
             LOGS_DIR / f"{slug}.pdflatex.log",
             cwd=tex_path.parent,
         )
-    shutil.copy(pdf_build_dir / "post.pdf", pdf_path)
+    shutil.copy(pdf_build_dir / PDF_NAME, pdf_path)
 
     logger.info("latexml %s", tex_path.relative_to(SITE_DIR.parent))
     run_command(
@@ -106,6 +110,25 @@ def render_post(tex_path: Path, site_title: str) -> Post:
         LOGS_DIR / f"{slug}.latexmlpost.log",
     )
 
+    # The ePub target lives only in latexmlc: latexmlpost rejects
+    # --format=epub, and feeding it our intermediate XML re-digests that XML as
+    # if it were TeX. So the ePub costs its own conversion pass from the
+    # source, the same way the PDF does.
+    logger.info("latexmlc %s/%s", slug, EPUB_NAME)
+    epub_build_dir.mkdir(parents=True, exist_ok=True)
+    run_command(
+        [
+            "latexmlc",
+            "--includestyles",
+            "--pmml",
+            f"--dest={epub_build_dir / EPUB_NAME}",
+            f"--log={LOGS_DIR / f'{slug}.latexmlc.log'}",
+            str(tex_path),
+        ],
+        LOGS_DIR / f"{slug}.latexmlc.log",
+    )
+    shutil.copy(epub_build_dir / EPUB_NAME, epub_path)
+
     inject_chrome(html_path, site_title, tags)
     post = extract_metadata(xml_path, slug)
     post.tags = tags
@@ -118,7 +141,7 @@ def inject_chrome(html_path: Path, site_title: str, tags: list[Tag]) -> None:
     stylesheet = f'<link rel="stylesheet" href="{STYLE_URL}" type="text/css">\n'
     document = document.replace("</head>", stylesheet + "</head>", 1)
 
-    navigation = str(CHROME.nav(HOME_URL, site_title, "post.pdf"))
+    navigation = str(CHROME.nav(HOME_URL, site_title, PDF_NAME, EPUB_NAME))
     footer = str(CHROME.footer(HOME_URL))
     tail = footer
     if tags:

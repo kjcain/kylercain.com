@@ -1,7 +1,7 @@
 # kylercain.com
 
 A small static publishing system for a personal blog written in LaTeX.
-Each post is compiled into both an HTML page and a downloadable PDF, while
+Each post is compiled into an HTML page and downloadable PDF and ePub, while
 Python and Jinja generate the home page, tag archives, and shared navigation.
 The finished site is made of static files that can be published directly to
 GitHub Pages.
@@ -11,6 +11,7 @@ GitHub Pages.
 - Write posts as standalone LaTeX documents.
 - Publish HTML through [LaTeXML](https://math.nist.gov/~BMiller/LaTeXML/).
 - Publish a PDF from the same source with `pdflatex`.
+- Publish an ePub 3 from the same source with `latexmlc`.
 - Extract each post's title, author, date, and abstract from LaTeXML output.
 - Generate per-tag archives and a tag index from a simple LaTeX comment.
 - Render post-body mathematics as native MathML.
@@ -51,6 +52,9 @@ used unchanged as the URL slug:
 ```text
 posts/2026-07-24-example.tex -> site/posts/2026-07-24-example/
 ```
+
+Each post directory holds `index.html`, `post.pdf`, and `post.epub`. The last
+two are linked from the post page and from every listing card.
 
 A minimal post looks like this:
 
@@ -139,6 +143,8 @@ JSON stops the build with an error.
 - Edit `templates/` to change the home page, tag pages, cards, navigation, or
   footer.
 - Edit [`posts/base.sty`](posts/base.sty) to change shared PDF formatting.
+- The ePub carries LaTeXML's own bundled stylesheets rather than
+  `static/style.css`, so reading apps apply their own theme.
 - Add files under `static/` to publish them unchanged at the site root.
 - Edit [`Dockerfile`](Dockerfile) when posts require additional TeX packages
   or build dependencies.

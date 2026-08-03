@@ -2,8 +2,8 @@
    Rendered as macros so the builder can splice them into the HTML that
    latexmlpost produces. #}
 
-{% macro nav(home_url, site_title, pdf_url) -%}
-<nav class="blog-nav"><a class="blog-home" href="{{ home_url }}">&larr; {{ site_title }}</a><a class="post-pdf-link" href="{{ pdf_url }}">Download as a PDF</a></nav>
+{% macro nav(home_url, site_title, pdf_url, epub_url) -%}
+<nav class="blog-nav"><a class="blog-home" href="{{ home_url }}">&larr; {{ site_title }}</a><span class="post-downloads"><a class="post-download" href="{{ pdf_url }}">a PDF</a><a class="post-download" href="{{ epub_url }}">an ePub</a></span></nav>
 {%- endmacro %}
 
 {% macro footer(home_url) -%}
